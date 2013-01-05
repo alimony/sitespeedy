@@ -1,0 +1,3 @@
+[submodule "handled"]
+	path = handled
+	url = git@github.com:alimony/handled.git
