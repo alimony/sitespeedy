@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,400italic,700italic" />
+	<meta charset="utf-8" />
+	<title>SiteSpeedy</title>
+	<meta name="description" content="SiteSpeedy calculates an overall PageSpeed score for your website based on a weighted average of your most visited pages." />
+	<meta name="author" content="Markus Amalthea Magnuson" />
+	<meta name="viewport" content="width=device-width,initial-scale=1" />
+	<!-- {{ concat_and_minify_css -->
+	<link rel="stylesheet" href="css/style.css" />
+	<!-- }} -->
+</head>
+<body>
+	<div id="wrapper">
+		<h1>SiteSpeedy</h1>
+		<h2>SiteSpeedy calculates an overall PageSpeed score for your website<br />
+		    based on a weighted average of your most visited pages.</h2>
+		<div id="selector-container">
+			<ul id="authorization" class="account-selector loading">
+				<li class="selected">
+					<a id="authorize-button" href="#" class="initially-hidden">Click here to authorize</a>
+					<span id="username"></span><a id="log-out" href="#" class="faint initially-hidden">(log out)</a>
+				</li>
+			</ul>
+			<ul id="accounts" class="account-selector initially-hidden"></ul>
+			<ul id="web-properties" class="account-selector initially-hidden"></ul>
+			<ul id="profiles" class="account-selector initially-hidden"></ul>
+		</div>
+		<div id="results">
+			<div id="status-message" class="initially-hidden"></div>
+			<img id="loading-ga-data" class="initially-hidden" src="img/loading.gif" width="16" height="16" alt="Loading Google Analytics data" />
+			<div id="progress-bar-container" class="initially-hidden">
+				<div id="progress-bar"></div>
+			</div>
+			<h2 class="initially-hidden">Your SiteSpeedy score is: <span id="score"></span></h2>
+			<p><a id="show-details-link" href="#" class="initially-hidden faint">Show details →</a></p>
+			<div id="details" class="initially-hidden">
+				<table>
+					<thead><tr><th>URL</th><th>PageSpeed</th></tr></thead>
+					<tbody></tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+	<script>window.jQuery || document.write('<script src="js/jquery-1.8.3.min.js"><\/script>')</script>
+	<!-- {{ concat_and_minify_js -->
+	<script src="js/underscore-1.4.3.min.js"></script>
+	<script src="js/credentials.js"></script>
+	<script src="js/sitespeedy.js"></script>
+	<!-- }} -->
+	<script src="https://apis.google.com/js/client.js?onload=onGoogleClientLoad"></script>
+</body>
+</html>
