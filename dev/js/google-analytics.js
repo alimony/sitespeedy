@@ -2,7 +2,7 @@
 	'use strict';
 
 	// Only track visits in the deployed application.
-	if (SITESPEEDY_DEBUG) {
+	if (!SITESPEEDY_DEBUG) {
 		var _gaq = _gaq || [];
 		_gaq.push(['_setAccount', 'UA-37768124-1']);
 		_gaq.push(['_trackPageview']);
