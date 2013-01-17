@@ -14,4 +14,5 @@
 		apiKey: 'AIzaSyCLV4xGkRF4-mh2pd_nd-cJiaQeckr8xEU',
 		scope: 'https://www.googleapis.com/auth/analytics.readonly'
 	};
+	window.SITESPEEDY_DEBUG = false;
 }());

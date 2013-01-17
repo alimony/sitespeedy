@@ -11,9 +11,8 @@
 	//    SiteSpeedy calculates an overall PageSpeed score for your website
 	//         based on a weighted average of your most visited pages.
 
-	var DEBUG = true;
 	function debug(message) {
-		if (DEBUG) {
+		if (SITESPEEDY_DEBUG) {
 			console.log(message);
 		}
 	}
