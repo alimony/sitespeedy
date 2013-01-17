@@ -4,74 +4,62 @@
 
 'use strict';
 
+// All file operations will be synchronous since the order they occur is
+// significant when concatenating several files.
+
+var path = require('path');
 var fs = require('fs');
 var compressor = require('yuicompressor');
 
-function compressInPlace(path) {
-	var type;
-	if (path.indexOf('.css') !== -1) {
-		type = 'css';
-	}
-	else if (path.indexOf('.js') !== -1) {
-		type = 'js';
-	}
-	else {
-		console.log('Unknown file type, need .css or .js');
-		process.exit(1);
-	}
-	compressor.compress(path, {
-		type: type,
-		o: path // Output file is same as input file, minifying it in place.
+function compressInPlace(destinationPath) {
+	compressor.compress(destinationPath, {
+		type: path.extname(destinationPath).slice(1), // 'css' or 'js' based on file extension.
+		o: destinationPath // Destination is same as source.
 	}, function (error, data, extra) {
 		if (error) {
 			console.log(error);
 		}
-		if (extra) {
+		if (extra) { // Warnings.
 			console.log(extra);
 		}
-		fs.writeFileSync(path, data);
-		console.log('Minified file written to ' + path);
+		fs.writeFileSync(destinationPath, data);
+		console.log('Minified file written to ' + destinationPath);
 	});
 }
 
-exports.concat_and_minify_css = function (contents) {
-	// We will run synchronous calls here, since the order of things is actually
-	// important when concatenating the files.
-
-	var destinationPath = 'css/style.min.css';
-
-	// Look for all CSS file paths in in the HTML input.
-	var re = /<.*?href="(.*?)".*?>/gi;
+function compressMatchesToDestination(contents, pattern, destinationPath, excludedPaths) {
 	var match;
+	var currentPath;
 	var sourcePath;
-	while (match = re.exec(contents)) {
-		sourcePath = 'dev/' + match[1];
+	while (match = pattern.exec(contents)) {
+		currentPath = match[1];
+		if (excludedPaths && excludedPaths.indexOf(currentPath) !== -1) {
+			sourcePath = currentPath;
+		}
+		else {
+			sourcePath = 'dev/' + currentPath;
+		}
 		fs.appendFileSync(destinationPath, fs.readFileSync(sourcePath));
 		console.log('Added ' + sourcePath + ' to be minified.');
 	}
 	compressInPlace(destinationPath);
+}
+
+exports.concat_and_minify_css = function (contents) {
+	var destinationPath = 'css/style.min.css';
+	var pattern = /<.*?href="(.*?)".*?>/gi;
+
+	compressMatchesToDestination(contents, pattern, destinationPath);
 
 	return '<link rel="stylesheet" href="' + destinationPath + '" />';
 };
 
 exports.concat_and_minify_js = function (contents) {
 	var destinationPath = 'js/sitespeedy.min.js';
-	var re = /<.*?src="(.*?)".*?>/gi;
-	var match;
-	var sourcePath;
-	while (match = re.exec(contents)) {
-		// Instead of dev credentials, use the existing deploy credentials
-		// already in the destination folder.
-		if (match[1].indexOf('credentials') !== -1) {
-			sourcePath = match[1];
-		}
-		else {
-			sourcePath = 'dev/' + match[1];
-		}
-		fs.appendFileSync(destinationPath, fs.readFileSync(sourcePath));
-		console.log('Added ' + sourcePath + ' to be minified.');
-	}
-	compressInPlace(destinationPath);
+	var pattern = /<.*?src="(.*?)".*?>/gi;
+	var excludedPaths = ['js/credentials.js'];
+
+	compressMatchesToDestination(contents, pattern, destinationPath, excludedPaths);
 
 	return '<script src="js/' + destinationPath + '"></script>';
 };
