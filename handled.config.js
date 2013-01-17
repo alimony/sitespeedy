@@ -61,5 +61,5 @@ exports.concat_and_minify_js = function (contents) {
 
 	compressMatchesToDestination(contents, pattern, destinationPath, excludedPaths);
 
-	return '<script src="js/' + destinationPath + '"></script>';
+	return '<script src="' + destinationPath + '"></script>';
 };
