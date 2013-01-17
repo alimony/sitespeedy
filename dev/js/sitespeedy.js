@@ -117,7 +117,8 @@
 
 	// This will reset all page elements to the inital state.
 	function resetPage() {
-
+		$('.initially-hidden').hide();
+		$('#username').html('').hide();
 	}
 
 	// Getting to the profile containing the Analytics data we need consists
