@@ -28,6 +28,10 @@ function compressInPlace(destinationPath) {
 }
 
 function compressMatchesToDestination(contents, pattern, destinationPath, excludedPaths) {
+	// Remove any existing file.
+	if (fs.existsSync(destinationPath)) {
+		fs.unlinkSync(destinationPath);
+	}
 	var match;
 	var currentPath;
 	var sourcePath;
