@@ -24,6 +24,7 @@ h1 {
 
 h2 {
 	font-size: 125%;
+	margin-top: 0.4em;
 	margin-bottom: 0.8em;
 	line-height: 1.1;
 }
@@ -109,7 +110,7 @@ a {
 }
 
 #progress-bar-container {
-	width: 50%%;
+	width: 50%;
 	background-color: #b3a898;
 	padding: 2px;
 	height: 1em;
