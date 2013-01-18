@@ -64,6 +64,20 @@ a {
 		color: #666;
 		text-align: right;
 	}
+	/* Display labels on top instead of pushed to the left, to preserve main
+	column width (and avoid of screen content) on small screens. */
+	@media (max-width: 40em) {
+		#selector-container .account-selector {
+			margin-right: 0;
+		}
+		#selector-container .account-selector:not(.loading):before {
+			position: static;
+			margin-left: 0;
+		}
+		#authorization {
+			position: relative;
+		}
+	}
 	#selector-container .account-selector:first-child { /* <ul> */
 		border-top: 0;
 	}
@@ -92,6 +106,15 @@ a {
 
 #log-out {
 	margin-left: 1em;
+}
+
+/* Display logout button on top instead of to the right on small screens. */
+@media (max-width: 40em) {
+	#log-out {
+		position: absolute;
+		right: 0;
+		margin-top: -1.3em;
+	}
 }
 
 #username {
@@ -142,9 +165,9 @@ a {
 		#details tbody tr:hover {
 			background-color: #ccc0ad;
 		}
-			#details th,
-			#details td {
-				padding: 0 1em;
+			#details th:first-child,
+			#details td:first-child {
+				padding-right: 1em;
 			}
 			#details th {
 				font-weight: bold;
