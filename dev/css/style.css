@@ -29,6 +29,13 @@ h2 {
 	line-height: 1.1;
 }
 
+/* Don't line break header on small screens, just let it flow. */
+@media (max-width: 40em) {
+	h2 br {
+		display: none;
+	}
+}
+
 a {
 	color: #333;
 	font-weight: bold;
