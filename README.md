@@ -3,7 +3,7 @@ SiteSpeedy
 
 This is the source code repository for [sitespeedy.org](http://sitespeedy.org).
 
-SiteSpeedy calculates an overall PageSpeed score for your website based on a weighted average of your most visited pages.
+SiteSpeedy calculates an overall PageSpeed score for your website based on a weighted average of your most visited pages, using data from your Google Analytics account.
 
 Development
 -----------

@@ -9,7 +9,8 @@
 	//  /____/ /_/   /_/   /____/ /____/ /_/    /____/ /____/ /____/   /_/
 	//
 	//    SiteSpeedy calculates an overall PageSpeed score for your website
-	//         based on a weighted average of your most visited pages.
+	//         based on a weighted average of your most visited pages,
+	//             using data from your Google Analytics account.
 
 	function debug(message) {
 		if (SITESPEEDY_DEBUG) {
